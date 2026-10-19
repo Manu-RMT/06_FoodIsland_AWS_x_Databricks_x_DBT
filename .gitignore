@@ -1,0 +1,5 @@
+FoodIsland_DBT/target/
+FoodIsland_DBT/dbt_packages/
+FoodIsland_DBT/logs/
+FoodIsland_DBT/.env
+FoodIsland_DBT/.venv_dbt/
