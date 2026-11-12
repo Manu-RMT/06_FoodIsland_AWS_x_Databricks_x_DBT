@@ -26,17 +26,20 @@ def create_bronze_table(category_name, description):
 
    @dlt.table(
        name = f"{BRONZE_ZONE}.foodIsland_{category_name}_incremental",
-       comment = f"foodIsland {description} incremental"
+       comment = f"{BRONZE_ZONE}.foodIsland {description} incremental"
    )
-   def taxi_landing_incremental():
+   def foodIsland_landing_incremental():
        df = (
-           spark.readStream.format("cloudFiles")
-               .option("cloudFiles.format", "csv")
-               .option("header", "true")
-               .option("cloudFiles.includeExistingFiles", "true")
-               .option("cloudFiles.schemaLocation", bronze_schema_autoload_path)
-               .option("cloudFiles.schemaEvolutionMode", "rescue") 
-               .load(raw_source_path)
+                spark.readStream.format("cloudFiles")
+                    .option("cloudFiles.format", "csv")
+                    .option("header", "true")
+                    .option("cloudFiles.includeExistingFiles", "true")
+                    .option("cloudFiles.schemaLocation", bronze_schema_autoload_path)
+                    .option("cloudFiles.schemaEvolutionMode", "rescue") 
+                    .load(raw_source_path)
+                    .withColumn("_ingestion_date", current_timestamp())
+                    .withColumn("_source_file", col("_metadata.file_path"))
+
        )
        for col_name in df.columns:
            new_name = col_name.replace(" ", "_")
