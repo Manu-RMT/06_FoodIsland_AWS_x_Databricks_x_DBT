@@ -1,6 +1,7 @@
 {{ config(
     materialized='incremental',
-    unique_key='user_id'
+    incremental_strategy='merge',
+    unique_key='customer_id'
 ) }}
 
 select 
@@ -10,7 +11,7 @@ select
     try_cast(age as int) as age,
     gender,
     marital_status,
-    Occupation,
+    Occupation as occupation,
     monthly_income as income_band,
     Educational_Qualifications as education_level,
     try_cast(family_size as int) as family_size

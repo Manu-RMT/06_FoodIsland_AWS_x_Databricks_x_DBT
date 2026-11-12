@@ -1,3 +1,9 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='merge',
+    unique_key='restaurant_id'
+) }}
+
 -- Modèle de nettoyage et standardisation des restaurants Food Island
 
 select
