@@ -1,0 +1,23 @@
+version : 2
+
+sources:
+  - name: bronze_layer
+    schema : 01_bronze 
+    database : workspace
+    description: "Couche bronze contenant les données brutes de l'application FoodIsland."
+    
+    tables:
+      - name: foodisland_orders_incremental
+        description: "Table contenant les commandes FoodIsland, avec un traitement incrémental pour ne charger que les nouvelles commandes depuis la dernière exécution."
+      - name: foodisland_food_incremental
+        description: "Table contenant les informations sur les aliments FoodIsland, avec un traitement incrémental pour ne charger que les nouvelles informations depuis la dernière exécution."
+      - name: foodisland_menu_incremental
+        description: "Table contenant les informations sur les menus FoodIsland, avec un traitement incrémental pour ne charger que les nouveaux menus depuis la dernière exécution."
+      - name: foodisland_restaurant_incremental
+        description: "Table contenant les informations sur les restaurants FoodIsland, avec un traitement incrémental pour ne charger que les nouvelles informations depuis la dernière exécution."
+      - name: foodisland_order_items_incremental
+        description: "Table contenant les informations sur les éléments de commande FoodIsland, avec un traitement incrémental pour ne charger que les nouveaux éléments depuis la dernière exécution."
+      - name: foodisland_users_incremental
+        description: "Table contenant les informations sur les utilisateurs FoodIsland, avec un traitement incrémental pour ne charger que les nouveaux utilisateurs depuis la dernière exécution."
+      - name: foodisland_reviews_incremental
+        description: "Table contenant les avis des utilisateurs sur les restaurants FoodIsland, avec un traitement incrémental pour ne charger que les nouveaux avis depuis la dernière exécution."
