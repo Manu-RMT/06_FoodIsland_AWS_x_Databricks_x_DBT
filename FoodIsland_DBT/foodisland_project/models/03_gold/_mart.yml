@@ -1,0 +1,63 @@
+version : 2
+models:
+  - name : fact_fdi_orders
+    description : "Table de faits sur les commandes, incluant le GMV, le nombre de commandes et le panier moyen (AOV)"
+    columns:
+      - name : order_id
+        description : "Identifiant unique de la commande"
+        tests : [unique, not_null]
+      - name : customer_id
+        description : "Identifiant unique du client"
+        tests : 
+          - relationships:
+              arguments:
+                to : ref('dim_fdi_customer')
+                field : customer_id
+      - name : order_status
+        description : "Statut de la commande (livrée, annulée, en cours, etc.)"
+        tests : 
+          - accepted_values:
+              arguments:
+                values : ['Delivered', 'Cancelled', 'Refunded', 'In Progress']
+    
+  - name : mart_fdi_daily_city_revenue
+    description : "Table de faits quotidienne par ville avec le GMV, le nombre de commandes et le panier moyen (AOV)"
+    columns:
+      - name : order_date
+        description : "Date de la commande"
+      - name : city
+        description : "Ville du restaurant"
+      - name : gmv
+        description : "Gross Merchandise Value (GMV) : somme des montants des ventes pour les commandes livrées"
+      - name : total_orders
+        description : "Nombre total de commandes livrées"
+      - name : aov
+        description : "Average Order Value (AOV) : GMV divisé par le nombre de commandes livrées"
+
+  - name : mart_fdi_delivery_sla
+    description : "Table de faits sur le SLA de livraison, incluant le temps moyen et le temps de livraison au 90ème percentile"
+    columns:
+      - name : order_date
+        description : "Date de la commande"
+      - name : avg_delivery_min
+        description : "Temps moyen de livraison en minutes"
+      - name : p90_delivery_min
+        description : "Temps de livraison au 90ème percentile en minutes"
+
+  - name : mart_fdi_restaurant_performance
+    description : "Table de faits sur la performance des restaurants, incluant le nombre total de commandes, la note moyenne des clients et le temps moyen de livraison"
+    columns:
+      - name : restaurant_id
+        description : "Identifiant unique du restaurant"
+      - name : restaurant_name
+        description : "Nom du restaurant"
+      - name : city
+        description : "Ville où se situe le restaurant"
+      - name : cuisine
+        description : "Type de cuisine proposée par le restaurant"
+      - name : total_orders
+        description : "Nombre total de commandes livrées pour ce restaurant"
+      - name : avg_customer_rating
+        description : "Note moyenne donnée par les clients pour ce restaurant"
+      - name : avg_delivery_min
+        description : "Temps moyen de livraison en minutes pour ce restaurant"

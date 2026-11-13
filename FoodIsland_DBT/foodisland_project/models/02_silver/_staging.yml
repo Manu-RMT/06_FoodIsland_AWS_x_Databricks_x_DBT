@@ -1,0 +1,39 @@
+version : 2
+
+models:
+  - name : foodisland_silv_foods
+    columns: 
+      - name : food_id
+        tests : [unique, not_null]
+  - name : foodisland_silv_menu
+    columns:
+      - name : menu_id
+        tests : [not_null]
+      - name : restaurant_id
+        tests : [not_null]
+      - name : food_id
+        tests : [not_null]
+  - name : foodisland_silv_orders_items
+    columns:
+      - name : order_item_id
+        tests : [unique, not_null]
+  - name : foodisland_silv_orders
+    columns:
+      - name : order_id
+        tests : [unique, not_null]
+      - name : customer_id
+        tests : [not_null]
+      - name : restaurant_id
+        tests : [not_null]
+  - name : foodisland_silv_restaurants
+    columns:
+      - name : restaurant_id
+        tests : [unique, not_null]
+  - name : foodisland_silv_users
+    columns:
+      - name : customer_id
+        tests : [unique, not_null]
+  - name : foodisland_slv_reviews
+    columns:
+      - name : review_id
+        tests : [unique, not_null]
