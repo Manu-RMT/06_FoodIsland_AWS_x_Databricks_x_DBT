@@ -25,8 +25,6 @@ select
 from {{ ref('foodisland_silv_orders') }}
 
 {% if is_incremental() %}
-  where 
-    order_timestamp > (select coalesce(max(order_timestamp), cast('1900-01-01' as timestamp)) from {{ this }})
-    and _ingestion_date > (select max(_ingestion_date) from {{ this }})
+  where order_timestamp > (select coalesce(max(order_timestamp), cast('1900-01-01' as timestamp)) from {{ this }})
 {% endif %}
 

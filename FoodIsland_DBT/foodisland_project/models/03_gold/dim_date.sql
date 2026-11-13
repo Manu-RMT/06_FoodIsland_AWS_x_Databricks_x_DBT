@@ -11,11 +11,11 @@ with date_spine as (
 )
 
 select
-    ds.date as date_day,
-    year(ds.date) as year,
-    month(ds.date) as month,
-    dayofmonth(ds.date) as day,
-    quarter(ds.date) as quarter,
-    date_format(ds.date, 'yyyy-MM-dd') as date_str
+    ds.date_day, -- Corrigé de ds.date en ds.date_day
+    year(ds.date_day) as year,
+    month(ds.date_day) as month,
+    dayofmonth(ds.date_day) as day,
+    quarter(ds.date_day) as quarter,
+    date_format(ds.date_day, 'yyyy-MM-dd') as date_str
 from date_spine ds
-order by ds.date;
+order by ds.date_day;

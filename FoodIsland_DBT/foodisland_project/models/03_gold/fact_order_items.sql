@@ -19,7 +19,5 @@ select
 from {{ ref('foodisland_silv_orders_items') }} oi
 inner join {{ ref('foodisland_silv_orders') }} o using (order_id)
 {% if is_incremental() %}
-  where 
-  o.order_timestamp > (select coalesce(max(order_ts), cast('1900-01-01'as timestamp)) from {{ this }})
-  and oi._ingestion_date > (select max(_ingestion_date) from {{ this }})
+  where o.order_timestamp > (select coalesce(max(order_ts), cast('1900-01-01'as timestamp)) from {{ this }})
 {% endif %}

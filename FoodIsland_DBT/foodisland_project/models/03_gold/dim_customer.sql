@@ -1,7 +1,7 @@
 select
         customer_id,
         customer_name,
-        email as customer_email,
+        customer_email,
         age,
         case
             when age < 18 then 'Under 18'
