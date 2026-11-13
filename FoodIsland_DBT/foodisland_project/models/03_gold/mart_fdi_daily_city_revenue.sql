@@ -17,6 +17,6 @@ select
     -- Panier Moyen (AOV - Average Order Value) : GMV divisé par le nombre de commandes livrées, arrondi à 2 décimales
     round(coalesce(sum(if(is_delivered, sales_amount, 0)) / nullif(count_if(is_delivered), 0), 0), 2) as aov
 
-from {{ ref('fact_orders') }} 
+from {{ ref('fact_fdi_orders') }} 
 
 group by 1, 2;

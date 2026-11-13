@@ -13,7 +13,7 @@ select
     -- (90% des commandes sont livrées en moins de ce temps)
     round(percentile_cont(0.9) within group (order by delivery_time_min), 1) as p90_delivery_min
 
-from {{ ref('fact_orders') }} 
+from {{ ref('fact_fdi_orders') }} 
 
 -- Filtrer uniquement sur les commandes qui ont été effectivement livrées
 where is_delivered 

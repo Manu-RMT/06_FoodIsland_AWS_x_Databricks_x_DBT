@@ -11,9 +11,9 @@ select
     round(avg(f.customer_rating), 2) as avg_customer_rating, 
     -- Temps de livraison moyen en minutes, arrondi à 1 décimale
     round(avg(f.delivery_time_min), 1) as avg_delivery_min 
-from {{ ref('fact_orders') }} f 
+from {{ ref('fact_fdi_orders') }} f 
 -- Jointure avec la dimension des restaurants pour récupérer leurs informations (nom, ville, type de cuisine)
-left join {{ ref('dim_restaurants') }} r 
+left join {{ ref('dim_fdi_restaurants') }} r 
     using (restaurant_id) 
 -- Regroupement des résultats par les 4 premières colonnes (restaurant_id, restaurant_name, city, cuisine)
 group by 1, 2, 3, 4;
