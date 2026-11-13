@@ -33,5 +33,5 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   foodisland_project:
     # Config indicated by + and applies to all files under models/example/
-    02_silver: {+materialized: table, +schema: 02_silver}
+    02_silver: {+materialized: view, +schema: 02_silver}
     03_gold: {+materialized: table, +schema: 03_gold}
