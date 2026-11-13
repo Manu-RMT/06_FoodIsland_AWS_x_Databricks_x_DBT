@@ -1,9 +1,3 @@
-{{ config(
-    materialized='incremental',
-    incremental_strategy='merge',
-    unique_key='restaurant_id'
-) }}
-
 -- Modèle de nettoyage et standardisation des restaurants Food Island
 
 select
@@ -50,7 +44,9 @@ select
     cuisine,
 
     -- Numéro de licence du restaurant
-    lic_no as license_number
+    lic_no as license_number,
+
+    _ingestion_date
 
 from {{ source('bronze_layer', 'foodisland_restaurant_incremental') }}
 

@@ -1,7 +1,8 @@
-{{ config(
+ {{ config(
     materialized='incremental',
-    incremental_strategy='append'
-) }}
+    incremental_strategy='merge',
+    unique_key='order_id'
+) }} 
 
 select 
     order_id, 
@@ -23,7 +24,12 @@ select
     order_status, 
     (order_status='Delivered') as is_delivered,
     customer_rating,
-    delivery_time_min
+    delivery_time_min,
+    _ingestion_date
 
 from {{ source('bronze_layer', 'foodisland_orders_incremental') }}
 where try_cast(order_id as bigint) is not null
+
+{% if is_incremental() %}
+    and _ingestion_date > (select max(_ingestion_date) from {{ this }})
+{% endif %}

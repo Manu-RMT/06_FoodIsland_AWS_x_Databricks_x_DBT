@@ -3,7 +3,8 @@ select
     try_cast(r_id as bigint) as restaurant_id,
     f_id as food_id,
     cuisine,
-    try_cast(price as decimal(10,2)) as price
+    try_cast(price as decimal(10,2)) as price,
+    _ingestion_date
 
 from {{ source('bronze_layer', 'foodisland_menu_incremental') }}
 where try_cast(r_id as bigint) is not null
