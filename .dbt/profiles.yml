@@ -12,4 +12,9 @@ foodisland_project:
       catalog: workspace
       schema: 01_bronze
 
-      threads: 16
+      threads: 4
+
+      file_format: delta
+
+
+      
