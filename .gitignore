@@ -6,4 +6,3 @@ FoodIsland_DBT/.venv_dbt_machine2/
 .env
 airflow/.env
 airflow/logs/
-airflow
