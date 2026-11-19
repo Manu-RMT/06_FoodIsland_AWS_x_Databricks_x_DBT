@@ -10,14 +10,12 @@ models:
         description : "Identifiant unique du client"
         tests : 
           - relationships:
-              arguments:
                 to : ref('dim_fdi_customer')
                 field : customer_id
       - name : order_status
         description : "Statut de la commande (livrée, annulée, en cours, etc.)"
         tests : 
           - accepted_values:
-              arguments:
                 values : ['Delivered', 'Cancelled', 'Refunded', 'In Progress']
     
   - name : mart_fdi_daily_city_revenue
